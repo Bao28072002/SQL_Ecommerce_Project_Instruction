@@ -40,13 +40,15 @@ Q1 2017 shows consistent website traffic, with March experiencing a notable spik
 ### Query 2: Bounce rate per traffic source in July 2017
 ```sql
 SELECT
-    trafficSource.source as source,
-    sum(totals.visits) as total_visits,
-    sum(totals.Bounces) as total_no_of_bounces,
-    (sum(totals.Bounces)/sum(totals.visits))* 100 as bounce_rate
-FROM `bigquery-public-data.google_analytics_sample.ga_sessions_201707*`
+  trafficSource.source AS source,
+  COUNT(fullVisitorId) AS total_visits,
+  SUM(totals.bounces) AS total_no_of_bounces,
+  ROUND((SUM(totals.bounces) / COUNT(*))*100, 3) AS bounce_rate
+FROM `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`
+WHERE 
+  _TABLE_SUFFIX BETWEEN '0701' AND '0731'
 GROUP BY source
-ORDER BY total_visits DESC;
+ORDER BY total_visits DESC
 ```
 
 | Row | source                | total_visits | total_no_of_bounces | bounce_rate |
@@ -65,41 +67,38 @@ ORDER BY total_visits DESC;
 Google drives the most traffic but has a high bounce rate. YouTube and Facebook have the highest bounce rates, while direct traffic shows better engagement.
 ### Query 3: Revenue by traffic source by week, by month in June 2017
 ```sql
-SELECT *
-FROM
-(SELECT 
-    'Month' AS time_type,
-    FORMAT_DATE('%Y%m', PARSE_DATE('%Y%m%d', date)) AS time,
+WITH product_revenue_data AS (
+  SELECT
+    date,
     trafficSource.source AS source,
-    FORMAT('%.4f',SUM(product.productRevenue)/1000000) AS revenue
-FROM 
-    `bigquery-public-data.google_analytics_sample.ga_sessions_201706*`,
+    product.productRevenue / 1000000 AS revenue 
+  FROM `bigquery-public-data.google_analytics_sample.ga_sessions_2017*`,
     UNNEST(hits) AS hit,
     UNNEST(hit.product) AS product
-WHERE 
-    product.productRevenue IS NOT NULL
-GROUP BY 
-    time, 
-    source
+  WHERE 
+    _TABLE_SUFFIX BETWEEN '0601' AND '0630'
+    AND product.productRevenue IS NOT NULL 
+)
 
-UNION ALL
-
+-- revenue of moth
 SELECT 
-    'Week' AS time_type,
-    FORMAT_DATE('%Y%W', PARSE_DATE('%Y%m%d', date)) AS time,
-    trafficSource.source AS source,
-    FORMAT('%.4f',SUM(product.productRevenue)/1000000) AS revenue
-FROM 
-    `bigquery-public-data.google_analytics_sample.ga_sessions_201706*`,
-    UNNEST(hits) AS hits,
-    UNNEST(hits.product) AS product 
-WHERE 
-    product.productRevenue IS NOT NULL
-GROUP BY 
-    time, 
-    source)
+  'Month' AS time_type,
+  FORMAT_DATE('%Y%m', PARSE_DATE('%Y%m%d', date)) AS time,
+  source,
+  ROUND(SUM(revenue), 4) AS revenue
+FROM product_revenue_data
+GROUP BY time, source
+UNION ALL
+-- revenue of week
+SELECT 
+  'Week' AS time_type,
+  FORMAT_DATE('%Y%W', PARSE_DATE('%Y%m%d', date)) AS time,
+  source,
+  ROUND(SUM(revenue), 4) AS revenue
+FROM product_revenue_data
+GROUP BY time, source
+ORDER BY source,time
 
-ORDER BY CAST(revenue AS FLOAT64) DESC;
 ```
 
 | Row | time_type | time   | source   | revenue    |
