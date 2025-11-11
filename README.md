@@ -1,21 +1,25 @@
 # [SQL] Website Performance Analysis
 
-## I. Introduction
-In this project, I applied advanced SQL techniques, including sliding window and aggregation queries, using Google BigQuery to analyze e-commerce data. I evaluated product performance, sales trends, discount strategies, customer retention, and inventory management. These insights supported the Marketing and Sales teams in making strategic, data-driven decisions to improve business outcomes.
-## II. Dataset Access
-The e-commerce dataset is stored in a public Google BigQuery dataset. To access the dataset, follow these steps:
-- Log in to your Google Cloud Platform account and create a new project.
-- Navigate to the BigQuery console and select your newly created project.
-- In the navigation panel, select "Add Data" and then "Search a project".
-- Enter the project ID "bigquery-public-data.google_analytics_sample.ga_sessions" and click "Enter".
-- Click on the "ga_sessions_" table to open it.
-## III. Key Focus Areas
-- **Product Performance Analysis**: Evaluated subcategory performance through sales metrics and year-over-year growth rates.
-- **Geographic Sales Patterns**: Identified top-performing territories by order quantity across multiple years.
-- **Discount Strategy Assessment**: Analyzed seasonal discount costs across product subcategories.
-- **Customer Retention Analysis**: Calculated retention rates for successfully shipped orders using cohort analysis.
-- **Inventory Management**: Examined stock level trends, month-over-month changes, and stock-to-sales ratios.
-- **Order Status Monitoring**: Quantified pending orders and their value to assess fulfillment efficiency.
+# I. Introduction
+In this project, I utilized advanced SQL techniques—such as sliding window functions and aggregation queries—within Google BigQuery to analyze e-commerce data. The analysis covered product performance, sales trends, discount effectiveness, customer retention, and inventory management. These insights enabled the Marketing and Sales teams to make informed, data-driven decisions that improved overall business outcomes.
+
+# II. Dataset Access
+The e-commerce dataset is hosted in a public Google BigQuery dataset. To access it, follow the steps below:
+
+1. Log in to your Google Cloud Platform account and create a new project.  
+2. Open the BigQuery console and select the newly created project.  
+3. In the navigation panel, choose **“Add Data”** → **“Search a project”**.  
+4. Enter the project ID: **`bigquery-public-data.google_analytics_sample.ga_sessions`** and press **Enter**.  
+5. Select the **`ga_sessions_`** table to explore the dataset.
+
+# III. Key Focus Areas
+- **Product Performance Analysis:** Assessed product subcategory performance using sales metrics and year-over-year growth.  
+- **Geographic Sales Patterns:** Identified top-performing regions based on order quantity across multiple years.  
+- **Discount Strategy Assessment:** Analyzed seasonal discount spending across various product subcategories.  
+- **Customer Retention Analysis:** Computed retention rates for successfully shipped orders through cohort analysis.  
+- **Inventory Management:** Investigated stock level patterns, month-over-month changes, and stock-to-sales ratios.  
+- **Order Status Monitoring:** Measured pending orders and their total value to evaluate fulfillment efficiency.
+
 ## IV. Exploring the Dataset
 ### Query 1: Calculate total visit, pageview, transaction for Jan, Feb and March 2017 
 ```sql
