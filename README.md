@@ -39,7 +39,7 @@ ORDER BY month;
 | 201702 | 62192  | 233373    | 733          |
 | 201703 | 69931  | 259522    | 993          |
 
-Q1 2017 shows consistent website traffic, with March experiencing a notable spike in transactions (993), indicating improved conversion rates or seasonal effects.
+Q1 2017 demonstrates steady website traffic, with March showing a significant surge in transactions (993). This increase suggests either an improvement in conversion rates or the influence of seasonal factors.
 
 ### Query 2: Bounce rate per traffic source in July 2017
 ```sql
@@ -68,7 +68,8 @@ ORDER BY total_visits DESC
 | 9   | sites.google.com      | 230          | 97                  | 42.174      |
 | 10  | facebook.com          | 191          | 102                 | 53.403      |
 
-Google drives the most traffic but has a high bounce rate. YouTube and Facebook have the highest bounce rates, while direct traffic shows better engagement.
+Google contributes the largest share of traffic but also records a high bounce rate. YouTube and Facebook exhibit the highest bounce rates overall, whereas direct traffic shows stronger user engagement.
+
 ### Query 3: Revenue by traffic source by week, by month in June 2017
 ```sql
 WITH product_revenue_data AS (
@@ -119,7 +120,8 @@ ORDER BY source,time
 | 10  | Week      | 201726 | google   | 5330.5700  |
 
 
-Direct traffic consistently generates the highest revenue across weeks and months. Google is the second-largest source. June shows strong overall performance, especially for direct traffic.
+Direct traffic consistently delivers the highest revenue across both weekly and monthly periods. Google ranks as the second-largest revenue source. June stands out with strong overall performance, particularly driven by direct traffic.
+
 ### Query 4: Average number of pageviews by purchaser type (purchasers vs non-purchasers) in June, July 2017
 ```sql
 WITH PurchaserData AS (
@@ -167,7 +169,8 @@ ORDER BY p.month;
 | 1   | 201706 | 94.02050113895217        | 316.86558846341671           |
 | 2   | 201707 | 124.23755186721992       | 334.05655979568053           |
 
-Non-purchasers exhibit significantly higher average pageviews compared to purchasers. Both groups increased pageviews from June to July, with purchasers showing a larger relative increase.
+Non-purchasers show a noticeably higher average number of pageviews compared to purchasers. Both groups experienced an increase in pageviews from June to July, with purchasers demonstrating a larger relative growth.
+
 ### Query 5: Average number of transactions per user that made a purchase in July 2017
 ```sql
 SELECT  FORMAT_DATE('%Y%m',PARSE_DATE('%Y%m%d', date)) AS Month,
@@ -186,7 +189,8 @@ ORDER BY Month;
 | 201707 | 4.16390041493776                |
 
 
-In July 2017, users who made purchases completed an average of 4.16 transactions. This suggests moderate repeat buying behavior among customers within the month.
+In July 2017, users who made purchases completed an average of 4.16 transactions. This indicates a moderate level of repeat buying behavior among customers during the month.
+
 ### Query 6: Average amount of money spent per session. Only include purchaser data in July 2017
 ```sql
 select
@@ -205,8 +209,9 @@ group by month;
 | 201707 | 43.86                         |
 
 
-In July 2017, purchasing users spent an average of $43.86 per session.
-This metric indicates the typical transaction value, useful for understanding customer spending patterns and optimizing pricing strategies.
+In July 2017, purchasing users spent an average of **$43.86 per session**.  
+This metric reflects the typical transaction value and provides useful insight into customer spending behavior, supporting more effective pricing and promotional strategies.
+
 ### Query 7: Other products purchased by customers who purchased product "YouTube Men's Vintage Henley" in July 2017
 ```sql
 WITH target_customers AS (
@@ -251,7 +256,9 @@ ORDER BY quantity_ordered DESC
 | 9   | Google Men's Short Sleeve Her...        | 2        |
 | 10  | Android Women's Fleece Hoodie           | 2        |
 
-Customers who bought the YouTube Men's Vintage Henley also favored Google-branded items, especially Sunglasses. There's a strong preference for casual wear and accessories across Google, YouTube, and Android product lines.
+Customers who purchased the **YouTube Men's Vintage Henley** also showed a preference for Google-branded products, particularly **Sunglasses**.  
+Overall, there is a strong inclination toward casual wear and accessories across the **Google**, **YouTube**, and **Android** product lines.
+
 ### Query 8: Calculate cohort map from product view to addtocart to purchase in Jan, Feb and March 2017
 ```sql
 with
@@ -311,6 +318,24 @@ order by pv.month;
 | 3   | 201703 | 23549            | 8782          | 2977         | 37.29            | 12.64         |
 
 
-Product view to purchase conversion rates improved consistently from January to March 2017. March saw the highest engagement, with 37.29% add-to-cart rate and 12.64% purchase rate. This trend indicates increasing effectiveness in converting browsers to buyers, possibly due to improved marketing or user experience.
+Product view-to-purchase conversion rates steadily improved from January to March 2017.  
+March recorded the highest engagement, with a **37.29% add-to-cart rate** and a **12.64% purchase rate**.  
+This trend suggests growing effectiveness in converting browsers into buyers, likely driven by enhanced marketing efforts or improved user experience.
+
 ## V. Conclusion
-Overall, this project utilized Google BigQuery to analyze an e-commerce dataset, extracting valuable insights across product performance, customer behavior, and sales patterns. Key findings include improving conversion rates, cross-selling opportunities among branded items, and geographic sales trends. The analysis revealed areas for optimization in marketing strategies, inventory management, and customer experience. By leveraging big data analytics, the project provides a foundation for data-driven decision-making, enabling the business to enhance product offerings, refine pricing strategies, and improve customer retention. These insights position the company to make informed strategic choices, potentially leading to improved performance and growth in the competitive e-commerce landscape.
+Overall, this project leveraged **Google BigQuery** to analyze an e-commerce dataset, uncovering valuable insights related to product performance, customer behavior, and sales trends.  
+
+Key findings include:  
+- Improving conversion rates  
+- Identifying cross-selling opportunities among branded items  
+- Highlighting geographic sales patterns  
+
+The analysis also pinpointed areas for optimization in marketing strategies, inventory management, and customer experience.  
+
+By utilizing big data analytics, the project establishes a foundation for **data-driven decision-making**, enabling the business to:  
+- Enhance product offerings  
+- Refine pricing strategies  
+- Boost customer retention  
+
+These insights equip the company to make informed strategic decisions, supporting improved performance and growth in the competitive e-commerce landscape.
+
