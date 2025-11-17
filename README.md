@@ -1,5 +1,8 @@
 # [SQL] Website Performance Analysis
 
+![Uploading image.png…]()
+
+
 # I. Introduction
 In this project, I utilized advanced SQL techniques—such as sliding window functions and aggregation queries—within Google BigQuery to analyze e-commerce data. The analysis covered product performance, sales trends, discount effectiveness, customer retention, and inventory management. These insights enabled the Marketing and Sales teams to make informed, data-driven decisions that improved overall business outcomes.
 
